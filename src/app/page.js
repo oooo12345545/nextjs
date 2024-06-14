@@ -5,6 +5,7 @@
 
 import {useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { 
   Navbar, 
   NavbarBrand, 
@@ -25,32 +26,16 @@ import CustomCard from "@/app/components/Card";
 export default function Home() {
 
   const [items, setItems ] = useState([]);
-  const tokenUrl = 'https://tdx.transportdata.tw/auth/realms/TDXConnect/protocol/openid-connect/token';
-  const apiUrl = 'https://tdx.transportdata.tw/api/basic/v2/Tourism/ScenicSpot/YunlinCounty';
 
   useEffect(() => {
-    const getToken = async () =>{
-      const clientId = process.env.TDX_CLIENT_ID;
-      const clientSecret = process.env.TDX_CLIENT_SECRET;
-  
-      const tokenParams = new URLSearchParams();
-      tokenParams.append('grant_type', 'client_credentials');
-      tokenParams.append('client_id', clientId);
-      tokenParams.append('client_secret', clientSecret);
-  
-      const tokenResponse = await fetch(tokenUrl,{
-        method: 'POST',
-        headers: {
-          'content-type': 'application/x-www-form-urlencoded'
-      },
-      body: tokenParams.toString()
-    });
-    };
-    
-  console.log
-
-  }, []);
-
+    async function fetchData(){
+      const response = await fetch('api/items');
+      const data = await response.json();
+      console.log(data);
+      setItems(data);
+    }
+    fetchData();
+    },[]);
 
   return (
     <>
@@ -60,7 +45,7 @@ export default function Home() {
         <div className="container mx-auto">
           <Navbar fluid className="bg-[#03857d]">
             <NavbarBrand as={Link} href="https://flowbite-react.com">
-              <img src="https://www.yuntech.edu.tw/images/website_png/Group_640.png" className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" />
+              <Image src="https://www.yuntech.edu.tw/images/website_png/Group_640.png" className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" />
               <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Flowbite React</span>
             </NavbarBrand>
             <NavbarToggle />
@@ -84,11 +69,11 @@ export default function Home() {
 
       <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
         <Carousel>
-          <img src="/images/banner/banner-1.jpg" alt="由 WU PEI HSUAN - 自己的作品, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=110297869" />
-          <img src="/images/banner/banner-2.jpg" alt="https://www.janfusun.com.tw/fancyworld.php" />
-          <img src="/images/banner/banner-3.jpg" alt="由 abc759kimo - 自己的作品, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=94599070" />
-          <img src="/images/banner/banner-4.jpg" alt="https://guide.easytravel.com.tw/city/16" />
-          <img src="/images/banner/banner-5.jpg" alt="由 Cpc3711 - 自己的作品, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=82700144" />
+          <Image src="/images/banner/banner-1.jpg" alt="由 WU PEI HSUAN - 自己的作品, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=110297869" />
+          <Image src="/images/banner/banner-2.jpg" alt="https://www.janfusun.com.tw/fancyworld.php" />
+          <Image src="/images/banner/banner-3.jpg" alt="由 abc759kimo - 自己的作品, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=94599070" />
+          <Image src="/images/banner/banner-4.jpg" alt="https://guide.easytravel.com.tw/city/16" />
+          <Image src="/images/banner/banner-5.jpg" alt="由 Cpc3711 - 自己的作品, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=82700144" />
         </Carousel>
       </div>
 
@@ -122,10 +107,10 @@ export default function Home() {
         </div>
       </div>
 
-      <div class="container mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-          { items.map( item =>
-          <CustomCard item={item}/>
+      <div className="container mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          { items.map((item, index) =>
+          <CustomCard item={item} key = {index}/>
           )}
         </div>
       </div>
