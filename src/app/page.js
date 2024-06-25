@@ -22,6 +22,8 @@ import {
   DarkThemeToggle
  } from "flowbite-react";
 import CustomCard from "@/app/components/Card";
+import AutoSizeImage from "@/app/components/AutoSizeImage";
+
 
 export default function Home() {
 
@@ -44,9 +46,15 @@ export default function Home() {
       <div className="bg-[#03857d]">    
         <div className="container mx-auto">
           <Navbar fluid className="bg-[#03857d]">
-            <NavbarBrand as={Link} href="https://flowbite-react.com">
-              <Image src="https://www.yuntech.edu.tw/images/website_png/Group_640.png" className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" />
-              <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Flowbite React</span>
+          <NavbarBrand as={Link} href="/">
+              <AutoSizeImage
+                src="https://www.yuntech.edu.tw/images/website_png/Group_640.png"
+                className="mr-3 h-6 sm:h-9"
+                alt="Flowbite React Logo"
+              />
+              <span className="self-center whitespace-nowrap text-xl font-semibold text-white">
+                YunTech Travale
+              </span>
             </NavbarBrand>
             <NavbarToggle />
             <NavbarCollapse>
@@ -69,11 +77,16 @@ export default function Home() {
 
       <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
         <Carousel>
-          <Image src="/images/banner/banner-1.jpg" alt="由 WU PEI HSUAN - 自己的作品, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=110297869" />
-          <Image src="/images/banner/banner-2.jpg" alt="https://www.janfusun.com.tw/fancyworld.php" />
-          <Image src="/images/banner/banner-3.jpg" alt="由 abc759kimo - 自己的作品, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=94599070" />
-          <Image src="/images/banner/banner-4.jpg" alt="https://guide.easytravel.com.tw/city/16" />
-          <Image src="/images/banner/banner-5.jpg" alt="由 Cpc3711 - 自己的作品, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=82700144" />
+          <AutoSizeImage src="/images/banner/banner-1.jpg" 
+          alt="由 WU PEI HSUAN - 自己的作品, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=110297869" />
+          <AutoSizeImage src="/images/banner/banner-2.jpg" 
+          alt="https://www.janfusun.com.tw/fancyworld.php" />
+          <AutoSizeImage src="/images/banner/banner-3.jpg" 
+          alt="由 abc759kimo - 自己的作品, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=94599070" />
+          <AutoSizeImage src="/images/banner/banner-4.jpg" 
+          alt="https://guide.easytravel.com.tw/city/16" />
+          <AutoSizeImage src="/images/banner/banner-5.jpg" 
+          alt="由 Cpc3711 - 自己的作品, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=82700144" />
         </Carousel>
       </div>
 
@@ -89,8 +102,8 @@ export default function Home() {
             <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
               {item.ScenicSpotName}
             </h5>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
-              {item.DescriptionDetail}
+            <p className="font-normal text-gray-700 dark:text-gray-400 ">
+              {item.DescriptionDetail.slice(0, 120) + '...。'} 
             </p>
             <Button>
               Read more
